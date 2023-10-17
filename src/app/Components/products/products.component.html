@@ -1,0 +1,39 @@
+<div>Enter your Maximum Price:</div>
+<input class="form-control" type="number" #maxPrice>
+<button type="button" class="btn btn-outline-success" style="margin: 10px;"
+  (click)="search(maxPrice.value)">Search</button>
+
+<table class="custom-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Image</th>
+      <th>AV.Quantity</th>
+      <th>Price</th>
+      <th>Count</th>
+      <th>Buy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prd of CatProducts ; index as i"(change)="filterProductByID()"
+      [ngClass]="{'bg-warning':prd.quantity==0, 'text-primary':prd.quantity==0}">
+      <td>{{i + 1}}</td>
+      <td>{{prd.name}}</td>
+      <td><img LightBox="red" [src]="prd.imgURL"></td>
+      <td>
+        <ng-container [ngSwitch]="prd.quantity">
+          <div *ngSwitchCase="0">Out Of Stock</div>
+          <div *ngSwitchCase="1">Last Item</div>
+          <div *ngSwitchCase="0">last 2 Item</div>
+          <div *ngSwitchDefault>{{prd.quantity}}</div>
+        </ng-container>
+      </td>
+      <td>{{prd.price |EURtoEGP | currency : 'EGP'}}</td>
+      <td><input type="number" #countValue></td>
+      <td><button type="button" class="btn btn-primary" (click)="buy(prd.id,prd.price,countValue.value)">Buy</button>
+    </tr>
+  <tbody>
+    <table>
+     
+     

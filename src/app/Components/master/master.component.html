@@ -1,0 +1,16 @@
+<div class="mb-3">
+    <label for="prdCat" class="form-label">Category</label>
+<select class="form-control" name="card" id="prdCat" [(ngModel)]="selectedId">
+   <option value="0" selected>ALL</option>
+    <option *ngFor="let cat of CategoryList" [value]="cat.id">{{cat.name}}</option>
+</select>
+<button type="button" class="btn btn-primary" (click)="ChangeCatToMobile()">Mobile</button>
+<button type="button" class="btn btn-primary" (click)="ChangeCatToLaptops()" style="margin: 5px;">Laptops</button>
+<button type="button" class="btn btn-primary" (click)="ChangeCatToCamera()">Camera</button>
+</div>
+
+<hr>
+<app-products [SentedCategoryID]="selectedId" (TotalPriceChanged)="onTotalPriceChanged($event)"></app-products>
+<hr>
+<div>Order Total Price: {{OrderTotalPrice}}</div>
+
